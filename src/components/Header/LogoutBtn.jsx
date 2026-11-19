@@ -9,7 +9,10 @@ function LogoutBtn() {
     authService.logout().then(dispatch(logout()));
   };
   return (
-    <button className="inline-block py-2 duration-200 hover:bg-blue-100 rounded-full">
+    <button
+      onClick={logoutHandler}
+      className="inline-block py-2 duration-200 hover:bg-blue-100 rounded-full"
+    >
       Logout
     </button>
   );
