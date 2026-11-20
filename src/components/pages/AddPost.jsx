@@ -1,15 +1,15 @@
-import React from 'react'
-import { Container,Post,PostForm } from '../index'
+import React from "react";
+import { Container } from "../index";
+import PostForm from "../post-form/PostForm";
 
 function AddPost() {
   return (
-    <div className='py-8'>
-        <Container>
-            <PostForm/>
-        </Container>
-      
+    <div className="py-8">
+      <Container>
+        <PostForm />
+      </Container>
     </div>
-  )
+  );
 }
 
-export default AddPost
+export default AddPost;

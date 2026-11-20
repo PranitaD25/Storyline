@@ -25,7 +25,7 @@ class AuthService {
       );
       if (userAccount) {
         //if account exists or created, redirect to login directly
-        return this.login(email, password);
+        return this.login({ email, password });
       } else {
         return userAccount;
       }
@@ -44,11 +44,12 @@ class AuthService {
 
   async getCurrentUser() {
     try {
-      await this.account.get();
+      return await this.account.get();
     } catch (error) {
-      console.log("Appwrite service::getCurrentUser::error", error);
+      console.error("getCurrentUser error:", error);
+
+      return null;
     }
-    return null;
   }
 
   async logout() {

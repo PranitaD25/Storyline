@@ -6,7 +6,7 @@ import { Button, Input, Logo } from "./index";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 
-function signup() {
+function Signup() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ function signup() {
         const userData = await authService.getCurrentUser();
         if (userData) {
           //on signup is complete, directly navigate user to home page
-          dispatch(authLogin());
+          dispatch(authLogin({ userData }));
           navigate("/");
         }
       }

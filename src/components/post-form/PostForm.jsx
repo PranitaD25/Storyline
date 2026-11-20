@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Input, RTE, Select } from "../index";
-import appwriteService from "../../appwrite/config";
+import appwriteService from "../../appwrite/conf";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -49,10 +49,14 @@ export default function PostForm({ post }) {
       if (file) {
         const fileId = file.$id;
         data.featuredImage = fileId;
+        console.log("Image ID before saving:", data.featuredImage);
+
         const dbPost = await appwriteService.createPost({
           ...data,
           userId: userData.$id,
         });
+
+        console.log("Saved post:", dbPost);
 
         if (dbPost) {
           navigate(`/post/${dbPost.$id}`);
@@ -138,7 +142,7 @@ export default function PostForm({ post }) {
           accept="image/png, image/jpg, image/jpeg, image/gif"
           {...register("image", { required: !post })} //image is mandatory when creating new post, and option when updating existing post
         />
-        {post && (
+        {post?.featuredImage ? (
           <div className="w-full mb-4">
             <img
               src={appwriteService.getFilePreview(post.featuredImage)}
@@ -146,6 +150,8 @@ export default function PostForm({ post }) {
               className="rounded-lg"
             />
           </div>
+        ) : (
+          <p>Image ID is missing</p>
         )}
         <Select
           options={["active", "inactive"]}

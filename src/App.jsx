@@ -16,9 +16,9 @@ function App() {
       .getCurrentUser()
       .then((userData) => {
         if (userData) {
-          useDispatch(login({ userData }));
+          dispatch(login({ userData }));
         } else {
-          useDispatch(logout());
+          dispatch(logout());
         }
       })
       .catch(() => console.log("Unable to fetch current user"))
@@ -27,9 +27,11 @@ function App() {
 
   return !loading ? (
     <div className="min-h-screen flex flex-wrap content-between bg-gray-400">
-      <div className="w-fullblock">
+      <div className="w-full block">
         <Header />
-        <main>TODO{<Outlet />}</main>
+        <main>
+          <Outlet />
+        </main>
         <Footer />
       </div>
     </div>

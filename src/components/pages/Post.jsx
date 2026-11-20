@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import appwriteService from "../appwrite/config";
-import { Button, Container } from "../components";
+import appwriteService from "../../appwrite/conf";
+import { Button, Container } from "../index";
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
 
@@ -38,11 +38,13 @@ export default function Post() {
     <div className="py-8">
       <Container>
         <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
-          <img
-            src={appwriteService.getFilePreview(post.featuredImage)}
-            alt={post.title}
-            className="rounded-xl"
-          />
+          {post?.featuredImage && (
+            <img
+              src={appwriteService.getFilePreview(post.featuredImage)}
+              alt={post.title}
+              className="rounded-xl"
+            />
+          )}
 
           {isAuthor && (
             <div className="absolute right-6 top-6">
@@ -60,7 +62,11 @@ export default function Post() {
         <div className="w-full mb-6">
           <h1 className="text-2xl font-bold">{post.title}</h1>
         </div>
-        <div className="browser-css">{parse(post.content)}</div>
+        {console.log("Post:", post)}
+
+        <div className="browser-css">
+          {typeof post?.content === "string" ? parse(post.content) : null}
+        </div>
       </Container>
     </div>
   ) : null;
