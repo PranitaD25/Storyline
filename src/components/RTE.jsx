@@ -2,6 +2,16 @@ import React from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { Controller } from "react-hook-form";
 
+// User writes blog content in RTE
+// TinyMCE detects the content change
+// Controller passes updated content to React Hook Form
+// handleSubmit() includes content in data
+
+// Remember this one line:
+// - register → React Hook Form directly manages a normal input.
+// - control + Controller → React Hook Form manages a custom input through a bridge.
+// Both ultimately put their values into the same form data object when you call handleSubmit().
+
 export default function RTE({ name, control, label, defaultValue = "" }) {
   return (
     <div className="w-full">

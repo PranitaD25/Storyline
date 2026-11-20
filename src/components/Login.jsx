@@ -19,6 +19,7 @@ function Login() {
       if (session) {
         const userData = await authService.getCurrentUser();
         if (userData) {
+          //on login complete, redirect user to home page /
           dispatch(authLogin());
           navigate("/");
         }
@@ -48,6 +49,7 @@ function Login() {
           </Link>
         </p>
         {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
+        {/* //we get data for submit automatically usig react-form and register */}
         <form onSubmit={handleSubmit(login)} className="mt-8">
           <div className="space-y-0">
             <Input

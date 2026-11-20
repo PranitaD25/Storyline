@@ -1,7 +1,7 @@
 import { Client, Account, ID } from "appwrite";
 import conf from "../conf/conf";
 
-export class AuthService {
+class AuthService {
   client = new Client();
   account;
 
@@ -13,8 +13,10 @@ export class AuthService {
     this.account = new Account(this.client);
   }
 
+  //async-await fun as creating account can take time
   async createAccount({ email, password, name }) {
     try {
+      //wait till account is created
       const userAccount = await this.account.create(
         ID.unique(),
         email,
@@ -22,6 +24,7 @@ export class AuthService {
         name,
       );
       if (userAccount) {
+        //if account exists or created, redirect to login directly
         return this.login(email, password);
       } else {
         return userAccount;

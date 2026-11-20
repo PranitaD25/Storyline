@@ -1,7 +1,7 @@
 import { Client, ID, Databases, Storage, Query } from "appwrite";
 import conf from "../conf/conf";
 
-export class Service {
+class Service {
   client = new Client();
   databases;
   bucket;
@@ -19,7 +19,7 @@ export class Service {
       return await this.databases.createDocument(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
-        slug,
+        slug, //each unique post identifier e.g post-1,post-2
         {
           title,
           content,

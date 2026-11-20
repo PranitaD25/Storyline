@@ -10,7 +10,7 @@ function signup() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const dispatch = useDispatch();
-  const [register, handleSubmit] = useForm();
+  const { register, handleSubmit } = useForm();
 
   const create = async (data) => {
     setError("");
@@ -19,6 +19,7 @@ function signup() {
       if (session) {
         const userData = await authService.getCurrentUser();
         if (userData) {
+          //on signup is complete, directly navigate user to home page
           dispatch(authLogin());
           navigate("/");
         }
@@ -48,6 +49,8 @@ function signup() {
           </Link>
         </p>
         {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
+        {/* data is directly passed to create using useForm, as we have register to each input */}
+        <input type="text" />
         <form onSubmit={handleSubmit(create)} className="mt-8">
           <div className="space-y-5">
             <Input
